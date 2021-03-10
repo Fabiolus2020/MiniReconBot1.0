@@ -16,10 +16,6 @@ struct package
   int potValue1;
   int potValue2;
   int modeCount;
-  int buttonJoystickCount;
-  int buttonForwardCount;
-  int animation1Count;
-  int animation2Count;
 };
 
 typedef struct package Package;
@@ -129,12 +125,174 @@ void modeOne()
 
 void modeTwo()
 {
+if (digitalRead(flt) != LOW) {
 
+
+
+
+      if (data.joyposX > 510)
+      {
+        // enable DRV8833
+        digitalWrite(slp, HIGH);
+        MotorSpeed1 = map(data.potValue1, 0, 1023, 0, 255);
+        MotorSpeed2 = map(data.potValue1, 0, 1023, 0, 255);
+
+        // This is forward
+        digitalWrite(ain1, LOW);
+        analogWrite(ain2, MotorSpeed1);
+        analogWrite(bin1, MotorSpeed2);
+        digitalWrite(bin2, LOW);
+
+      }
+
+      else if (data.joyposX < 480)
+      {
+        // enable DRV8833
+        digitalWrite(slp, HIGH);
+        MotorSpeed1 = map(data.potValue1, 0, 1023, 0, 255);
+        MotorSpeed2 = map(data.potValue1, 0, 1023, 0, 255);
+
+        // This is forward
+        analogWrite(ain1, MotorSpeed1);
+        digitalWrite(ain2, LOW);
+        digitalWrite(bin1, LOW);
+        analogWrite(bin2, MotorSpeed2);
+
+      }
+      else  if (data.joyposY < 505)
+      {
+        // enable DRV8833
+        digitalWrite(slp, HIGH);
+        MotorSpeed1 = map(data.potValue1, 0, 1023, 0, 255);
+        MotorSpeed2 = map(data.potValue1, 0, 1023, 0, 255);
+
+        // This is forward
+        analogWrite(ain1, MotorSpeed1);
+        digitalWrite(ain2, LOW);
+        analogWrite(bin1, MotorSpeed2);
+        digitalWrite(bin2, LOW);
+
+      }
+      else  if (data.joyposY > 520)
+      {
+        // enable DRV8833
+        digitalWrite(slp, HIGH);
+        MotorSpeed1 = map(data.potValue1, 0, 1023, 0, 255);
+        MotorSpeed2 = map(data.potValue1, 0, 1023, 0, 255);
+
+        // This is forward
+        digitalWrite(ain1, LOW);
+        analogWrite(ain2, MotorSpeed1);
+        digitalWrite(bin1, LOW);
+        analogWrite(bin2, MotorSpeed2);
+
+      }
+      else {
+        digitalWrite(ain1, LOW);
+        digitalWrite(ain2, LOW);
+        digitalWrite(bin1, LOW);
+        digitalWrite(bin2, LOW);
+        // disable DRV8833, conserve power
+        digitalWrite(slp, LOW);
+      }
+    }
+    //else {
+
+    //  digitalWrite(ain1, LOW);
+    //  digitalWrite(ain2, LOW);
+    //  digitalWrite(bin1, LOW);
+    //  digitalWrite(bin2, LOW);
+    // disable DRV8833, conserve power
+    // digitalWrite(slp, LOW);
+    //}
+
+    delay(20);
 }
 
 void modeThree()
 {
+if (digitalRead(flt) != LOW) {
 
+
+
+
+      if (data.joyposX > 510)
+      {
+        // enable DRV8833
+        digitalWrite(slp, HIGH);
+        MotorSpeed1 = map(data.potValue1, 0, 1023, 0, 255);
+        MotorSpeed2 = map(data.potValue2, 0, 1023, 0, 255);
+
+        // This is forward
+        digitalWrite(ain1, LOW);
+        analogWrite(ain2, MotorSpeed1);
+        analogWrite(bin1, MotorSpeed2);
+        digitalWrite(bin2, LOW);
+
+      }
+
+      else if (data.joyposX < 480)
+      {
+        // enable DRV8833
+        digitalWrite(slp, HIGH);
+        MotorSpeed1 = map(data.potValue1, 0, 1023, 0, 255);
+        MotorSpeed2 = map(data.potValue2, 0, 1023, 0, 255);
+
+        // This is forward
+        analogWrite(ain1, MotorSpeed1);
+        digitalWrite(ain2, LOW);
+        digitalWrite(bin1, LOW);
+        analogWrite(bin2, MotorSpeed2);
+
+      }
+      else  if (data.joyposY < 505)
+      {
+        // enable DRV8833
+        digitalWrite(slp, HIGH);
+        MotorSpeed1 = map(data.potValue1, 0, 1023, 0, 255);
+        MotorSpeed2 = map(data.potValue2, 0, 1023, 0, 255);
+
+        // This is forward
+        analogWrite(ain1, MotorSpeed1);
+        digitalWrite(ain2, LOW);
+        analogWrite(bin1, MotorSpeed2);
+        digitalWrite(bin2, LOW);
+
+      }
+      else  if (data.joyposY > 520)
+      {
+        // enable DRV8833
+        digitalWrite(slp, HIGH);
+        MotorSpeed1 = map(data.potValue1, 0, 1023, 0, 255);
+        MotorSpeed2 = map(data.potValue2, 0, 1023, 0, 255);
+
+        // This is forward
+        digitalWrite(ain1, LOW);
+        analogWrite(ain2, MotorSpeed1);
+        digitalWrite(bin1, LOW);
+        analogWrite(bin2, MotorSpeed2);
+
+      }
+      else {
+        digitalWrite(ain1, LOW);
+        digitalWrite(ain2, LOW);
+        digitalWrite(bin1, LOW);
+        digitalWrite(bin2, LOW);
+        // disable DRV8833, conserve power
+        digitalWrite(slp, LOW);
+      }
+    }
+    //else {
+
+    //  digitalWrite(ain1, LOW);
+    //  digitalWrite(ain2, LOW);
+    //  digitalWrite(bin1, LOW);
+    //  digitalWrite(bin2, LOW);
+    // disable DRV8833, conserve power
+    // digitalWrite(slp, LOW);
+    //}
+
+    delay(20);
 
 }
 
@@ -190,10 +348,10 @@ void loop() {
     {
       modeThree();
     }
-    if (data.modeCount == 4)
-    {
-      modeFour();
-    }
+   // if (data.modeCount == 4)
+  //  {
+   //   modeFour();
+   // }
 
   }
 
