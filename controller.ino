@@ -19,7 +19,6 @@ struct package
   int modeCount;
 };
 
-
 //define object for wieless communication
 typedef struct package Package;
 Package data;
@@ -37,19 +36,18 @@ int joyposY = 512;
 int potValue1 = 0;
 int potValue2 = 0;
 
-
 //initial value of animation1 and 2 //animation1 is to control counter to cycle throught Mode1(frontlight,backlight,left,rightlight)
 //animation2 is a counter to cycle through the ALA predefined templates, 7 in totals that I chose based on current, the lowest the better.
-int animation1Count = 0;
-int animation2Count = 0;
-int buttonJoystickCount = 0;
+//int animation1Count = 0;
+//int animation2Count = 0;
+//int buttonJoystickCount = 0;
 int modeCount;
 
 //defining buttons using ezbutton library
 ezButton modeButton(7);  // create ezButton object that attach to pin 7;
-ezButton buttonJoystick(5);  // create ezButton object that attach to pin 5;
-ezButton buttonForward(4);  // create ezButton object that attach to pin 4;
-ezButton buttonBackward(3);  // create ezButton object that attach to pin 3;
+//ezButton buttonJoystick(5);  // create ezButton object that attach to pin 5;
+//ezButton buttonForward(4);  // create ezButton object that attach to pin 4;
+//ezButton buttonBackward(3);  // create ezButton object that attach to pin 3;
 
 void setup() {
   Serial.begin(9600);
@@ -69,25 +67,24 @@ void setup() {
   digitalWrite(ledModeStatusCount, LOW);
   delay(10);
 
-
   //The below I use for debounce issue using the EZbutton library, had to adjust for the switch button on thumbjoystick
   modeButton.setDebounceTime(50); // set debounce time to 50 milliseconds
-  buttonJoystick.setDebounceTime(80); // set debounce time to 80 milliseconds
-  buttonForward.setDebounceTime(50); // set debounce time to 50 milliseconds
-  buttonBackward.setDebounceTime(50); // set debounce time to 50 milliseconds
+//  buttonJoystick.setDebounceTime(80); // set debounce time to 80 milliseconds
+//  buttonForward.setDebounceTime(50); // set debounce time to 50 milliseconds
+//  buttonBackward.setDebounceTime(50); // set debounce time to 50 milliseconds
 }
 void loop() {
 
   modeButton.loop(); // MUST call the loop() function first
-  buttonJoystick.loop(); // MUST call the loop() function first
-  buttonForward.loop(); // MUST call the loop() function first
-  buttonBackward.loop(); // MUST call the loop() function first
+//  buttonJoystick.loop(); // MUST call the loop() function first
+//  buttonForward.loop(); // MUST call the loop() function first
+//  buttonBackward.loop(); // MUST call the loop() function first
 
   //from EZbutton library to keep count of buttons count. Works great!
   unsigned long modeButtonCount = modeButton.getCount();
-  unsigned long buttonJoystickCount = buttonJoystick.getCount();
-  unsigned long buttonForwardCount = buttonForward.getCount();
-  unsigned long buttonBackwardCount = buttonBackward.getCount();
+//  unsigned long buttonJoystickCount = buttonJoystick.getCount();
+//  unsigned long buttonForwardCount = buttonForward.getCount();
+//  unsigned long buttonBackwardCount = buttonBackward.getCount();
 
   //prepare to capture data to pass wirelessly using data for identifier.
   myRadio.write(&data, sizeof(data));
@@ -103,7 +100,6 @@ Serial.println(data.joyposY);
   if (modeButton.isReleased()) {
 
     if (modeButtonCount >= 4) modeButton.resetCount();
-
 
     for (int i = 0; i < modeButtonCount; i++) {
       digitalWrite(ledModeStatusCount, LOW);
